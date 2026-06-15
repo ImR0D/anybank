@@ -1,0 +1,14 @@
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  max-width: 65rem;
+  padding: 2.5rem 1rem;
+  margin: 0 auto;
+}
+.banner-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
