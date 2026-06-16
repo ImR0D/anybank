@@ -1,0 +1,30 @@
+<main class="form-wrapper">
+  <form action="" class="form">
+    <h2 class="titulo">Nova Transação</h2>
+    <div class="campos">
+      <label class="campo-grupo">
+        Transação
+        <div class="select-wrapper">
+          <select name="tipo-transacao" class="campo select-tipo-transacao" required>
+            <option value="" selected disabled>Selecione o tipo de transação</option>
+            <option value="deposito">Depósito</option>
+            <option value="saque">Saque</option>
+          </select>
+        </div>
+      </label>
+      <label class="campo-grupo"
+        >Valor
+        <div class="input-wrapper">
+          <input
+            type="number"
+            name="valor"
+            class="campo input-valor-transacao"
+            min="0.05"
+            step="0.05"
+          />
+        </div>
+      </label>
+      <button class="botao-confirmar-transacao">Confirmar transação</button>
+    </div>
+  </form>
+</main>
