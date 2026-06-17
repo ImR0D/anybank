@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Transaction, TransactionType } from '../../models/transaction';
 
 @Component({
   selector: 'app-form-nova-transacao',
@@ -8,14 +9,19 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './form-nova-transacao.css',
 })
 export class FormNovaTransacao {
-  valorTransacao = '00,00';
-  transactionType = '';
+  tipoTransacao = '';
+  valorTransacao = '';
+
+  transacaoCriada = output();
 
   realizarTransacao() {
-    console.log('Transação em andamento...');
-    console.log('Selected Transaction Type: ', this.transactionType);
-    console.log('Valor: ', this.valorTransacao);
+    const transacao = new Transaction(
+      this.tipoTransacao as TransactionType,
+      Number(this.valorTransacao),
+    );
+
+    this.transacaoCriada.emit();
     this.valorTransacao = '';
-    this.transactionType = '';
+    this.tipoTransacao = '';
   }
 }
