@@ -12,15 +12,14 @@ export class FormNovaTransacao {
   tipoTransacao = '';
   valorTransacao = '';
 
-  transacaoCriada = output();
-
+  transacaoCriada = output<Transaction>();
   realizarTransacao() {
     const transacao = new Transaction(
       this.tipoTransacao as TransactionType,
       Number(this.valorTransacao),
     );
 
-    this.transacaoCriada.emit();
+    this.transacaoCriada.emit(transacao);
     this.valorTransacao = '';
     this.tipoTransacao = '';
   }
