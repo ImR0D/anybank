@@ -27,6 +27,9 @@ export class App {
   } satisfies Record<TransactionType, (valor: number) => number>;
 
   private isValidTransaction(t: Transaction): boolean {
+    let isValidType = Object.values(TransactionType).includes(t.tipo);
+
+    if (!isValidType) return false;
     if (t.valor < 0) return false;
     if (t.tipo == TransactionType.Saque && t.valor > this.saldo()) return false;
     return true;
