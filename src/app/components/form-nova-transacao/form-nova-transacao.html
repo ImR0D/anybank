@@ -32,6 +32,13 @@
         </div>
       </label>
       <button class="botao-confirmar-transacao">Confirmar transação</button>
+      <input
+        type="text"
+        [(ngModel)]="transactionError"
+        name="erroTransacao"
+        class="label-text erro-transacao"
+        disabled
+      />
     </div>
   </form>
 </main>

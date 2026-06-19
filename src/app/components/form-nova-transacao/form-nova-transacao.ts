@@ -1,4 +1,12 @@
-import { Component, output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  effect,
+  EventEmitter,
+  inject,
+  input,
+  output,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Transaction, TransactionType } from '../../models/transaction';
 
@@ -9,10 +17,16 @@ import { Transaction, TransactionType } from '../../models/transaction';
   styleUrl: './form-nova-transacao.css',
 })
 export class FormNovaTransacao {
+  private cdr = inject(ChangeDetectorRef);
+  private errorTimeout: any;
+
+  transactionError = '';
   tipoTransacao = '';
   valorTransacao = '';
 
   transacaoCriada = output<Transaction>();
+  transacaoRecebida = input<Transaction>();
+
   realizarTransacao() {
     const transacao = new Transaction(
       this.tipoTransacao as TransactionType,
@@ -22,5 +36,43 @@ export class FormNovaTransacao {
     this.transacaoCriada.emit(transacao);
     this.valorTransacao = '';
     this.tipoTransacao = '';
+
+    let transaction = this.transacaoRecebida();
+    if (transaction != null && transaction.hasError) {
+      this.transactionError = transaction.errorMessage!;
+    }
+  }
+
+  constructor() {
+    effect(() => {
+      const transaction = this.transacaoRecebida();
+
+      this.checkTransactionErrorTimeouts();
+
+      if (transaction && transaction.hasError) {
+        this.transactionError = transaction.errorMessage ?? 'Erro ao realizar transação';
+        if (this.errorTimeout) {
+          clearTimeout(this.errorTimeout);
+        }
+      }
+
+      this.clearTransactionErrorTimeout(2000);
+    });
+  }
+
+  private checkTransactionErrorTimeouts() {
+    const transaction = this.transacaoRecebida();
+    if (!transaction || !transaction.hasError) {
+      this.transactionError = '';
+      if (this.errorTimeout) clearTimeout(this.errorTimeout);
+      this.cdr.markForCheck();
+      return;
+    }
+  }
+  private clearTransactionErrorTimeout(timeout: number) {
+    this.errorTimeout = setTimeout(() => {
+      this.transactionError = '';
+      this.cdr.markForCheck();
+    }, timeout);
   }
 }

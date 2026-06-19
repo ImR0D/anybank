@@ -11,11 +11,26 @@ import { Transaction, TransactionType } from './models/transaction';
 })
 export class App {
   transactions = signal<Transaction[]>([]);
+  processedTransaction = signal<Transaction | undefined>(undefined);
+
+  constructor() {
+    this.processedTransaction.set(undefined);
+  }
 
   computeTransaction = {
-    [TransactionType.Deposito]: (valor) => valor,
-    [TransactionType.Saque]: (valor) => -valor,
+    [TransactionType.Deposito]: (valor) => {
+      return valor;
+    },
+    [TransactionType.Saque]: (valor) => {
+      return -valor;
+    },
   } satisfies Record<TransactionType, (valor: number) => number>;
+
+  private isValidTransaction(t: Transaction): boolean {
+    if (t.valor < 0) return false;
+    if (t.tipo == TransactionType.Saque && t.valor > this.saldo()) return false;
+    return true;
+  }
 
   saldo = computed(() => {
     return this.transactions().reduce((acc, currentTransaction) => {
@@ -25,6 +40,13 @@ export class App {
   });
 
   processarTransacao(transaction: Transaction) {
+    this.processedTransaction.set(transaction);
+
+    if (!this.isValidTransaction(transaction)) {
+      transaction.hasError = true;
+      transaction.errorMessage = 'A transação é inválida e não pôde ser concluída!';
+      return;
+    }
     this.transactions.update((listTransactions) => [transaction, ...listTransactions]);
   }
 }

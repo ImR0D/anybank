@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-conta',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './conta.html',
   styleUrl: './conta.css',
 })
-export class Conta {}
+export class Conta {
+  saldo = input.required<number>();
+}

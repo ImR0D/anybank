@@ -129,3 +129,18 @@
 .botao-confirmar-transacao:focus {
   background: var(--azul-pressionado);
 }
+
+.label-text {
+  border: none;
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.erro-transacao {
+  color: #e03030;
+  font-weight: 600;
+  font-size: 12px;
+}
