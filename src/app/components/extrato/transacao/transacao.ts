@@ -1,6 +1,6 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, input } from '@angular/core';
-import { Transaction } from '../../../models/transaction';
+import { Component, computed, input } from '@angular/core';
+import { Transaction, TransactionType } from '../../../models/transaction';
 
 @Component({
   selector: 'app-transacao',
@@ -10,4 +10,10 @@ import { Transaction } from '../../../models/transaction';
 })
 export class Transacao {
   transactionItem = input.required<Transaction>();
+  valorPorTipoTransacao = computed(() => {
+    if (this.transactionItem().tipo == TransactionType.Saque) {
+      return this.transactionItem().valor * -1;
+    }
+    return this.transactionItem().valor;
+  });
 }

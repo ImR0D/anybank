@@ -1,7 +1,7 @@
 <div class="transacao">
   <span class="small tipo">{{ transactionItem().tipo }}</span>
   <div class="transacao_row">
-    <span class="valor">{{ transactionItem().valor | currency: 'BRL' }}</span>
+    <span class="valor">{{ valorPorTipoTransacao() | currency: 'BRL' }}</span>
     <span class="small data">{{
       transactionItem().dataTransacao | date: 'EEE, dd/MM/yyyy HH:mm'
     }}</span>
