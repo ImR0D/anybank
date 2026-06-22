@@ -1,0 +1,14 @@
+<aside class="extrato">
+  <h2 class="titulo">Extrato</h2>
+  <ul class="transacoes">
+    @if (transacoes().length == 0) {
+      <li class="nenhuma_transacao">Nenhuma transação identificada até o momento</li>
+    } @else {
+      @for (transacao of transacoes(); track transacao.id) {
+        <li>
+          <app-transacao [transactionItem]="transacao" />
+        </li>
+      }
+    }
+  </ul>
+</aside>

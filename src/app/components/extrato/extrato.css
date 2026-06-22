@@ -1,0 +1,60 @@
+.extrato {
+  border-radius: 0.5rem;
+  background: var(--fundo-cinza-claro, #f5f5f5);
+  padding: 2rem 1.5rem;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.titulo {
+  font-size: 1.5625rem;
+  font-weight: 600;
+  line-height: 125%;
+}
+
+.transacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 32em;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  overflow-y: auto;
+  padding-right: 0.5em;
+  border: none;
+}
+.nenhuma_transacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000010;
+  padding: 0.9em 1em;
+  font-weight: 400;
+  font-size: 14px;
+  color: #30303090;
+  border-radius: 0.8rem;
+}
+
+.extrato {
+  width: auto;
+}
+
+@media screen and (max-width: 70rem) {
+  .extrato {
+    border-radius: 0.5rem;
+    background: var(--fundo-cinza-claro, #f5f5f5);
+    padding: 2rem 1.5rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .extrato {
+    flex-basis: 100%;
+  }
+  .transacoes {
+    display: flex;
+  }
+}

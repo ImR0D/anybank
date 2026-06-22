@@ -1,18 +1,11 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  effect,
-  EventEmitter,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, effect, inject, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Transaction, TransactionType } from '../../models/transaction';
+import { KeyValuePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-nova-transacao',
-  imports: [FormsModule],
+  imports: [FormsModule, KeyValuePipe, TitleCasePipe],
   templateUrl: './form-nova-transacao.html',
   styleUrl: './form-nova-transacao.css',
 })
@@ -26,11 +19,13 @@ export class FormNovaTransacao {
 
   transacaoCriada = output<Transaction>();
   transacaoRecebida = input<Transaction>();
+  tipoTransacaoEnum = TransactionType;
 
   realizarTransacao() {
     const transacao = new Transaction(
       this.tipoTransacao as TransactionType,
       Number(this.valorTransacao),
+      new Date(),
     );
 
     this.transacaoCriada.emit(transacao);

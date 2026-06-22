@@ -1,0 +1,33 @@
+.transacao {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #40404033;
+  border-width: 2px;
+}
+.transacao_row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 0.75em;
+}
+
+.valor {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+}
+.tipo {
+  display: flex;
+}
+.tipo,
+.data {
+  display: flex;
+  color: #6d6d6dbb;
+  font-weight: 600;
+  line-height: 1.3em;
+}
+
+.small {
+  font-size: 12px;
+}

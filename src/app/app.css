@@ -1,14 +1,25 @@
 .app {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  max-width: 65rem;
+  gap: 1.2rem;
+  max-width: 70rem;
   padding: 2.5rem 1rem;
-  margin: 0 auto;
+  margin: 0 5% 0 15%;
 }
 .banner-form-wrapper {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   flex: 1;
+}
+
+.extrato {
+  gap: 1em;
+  flex-basis: 20rem;
+}
+
+@media screen and (max-width: 48rem) {
+  .extrato {
+    flex-basis: 100%;
+  }
 }
